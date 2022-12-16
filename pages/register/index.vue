@@ -55,12 +55,7 @@
                 </v-col>
             </v-row>
         </v-container>
-        <v-dialog v-model="dialog" max-width="290">
-            <v-card>
-                <v-card-title>Form is error</v-card-title>
-                <v-card-text v-html="errorMsg"></v-card-text>
-            </v-card>
-        </v-dialog>
+        
     </div>
 </template>
 
@@ -68,8 +63,6 @@
 export default {
     data() {
         return {
-            dialog: false,
-            errorMsg: 'TEST',
             form: {
                 firstname: '',
                 lastname: '',
@@ -96,15 +89,19 @@ export default {
                 }
             })
             if(!validated) {
-                this.errorMsg = errors.map((error) => error+'<br/>').join('')
-                this.dialog = true
+                this.$store.dispatch('setDialog', {
+                    isShow: true,
+                    title: 'Form is error',
+                    message: errors.map((error) => error+'<br/>').join('')
+                })
             }
             //console.log(errorMsg)
             return validated
         },
         next() {
             if(this.validate()) {
-               this.$router.push('/register/step2') 
+                this.$store.dispatch('setRegister', this.form)
+                this.$router.push('/register/step2') 
             }
         },
     }
