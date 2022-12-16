@@ -16,7 +16,9 @@
                     </div>
                 </v-col>
                 <v-col cols="12" class="text-center pb-0">
-                    <img src="~/assets/profile.jpg" alt="" width="155">
+                    <v-avatar size="155px">
+                        <img src="~/assets/profile.jpg" alt="" width="155">
+                    </v-avatar>
                 </v-col>
                 <v-col cols="12" class="text-center pt-2 pb-0">
                     Display name
