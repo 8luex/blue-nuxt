@@ -7,7 +7,12 @@ export const state = () => ({
     register: {
         firstname: '',
         lastname: '',
-        gender: 1
+        gender: 1,
+        email: '',
+        phone: '',
+        birthday: new Date().toISOString().substr(0, 10),
+        company: '',
+        position: ''
     }
 })
 

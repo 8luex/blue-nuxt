@@ -64,9 +64,9 @@ export default {
     data() {
         return {
             form: {
-                firstname: '',
-                lastname: '',
-                gender: 1
+                firstname: this.$store.getters.getRegister.firstname,
+                lastname: this.$store.getters.getRegister.lastname,
+                gender: this.$store.getters.getRegister.gender
             }
         }
     },
