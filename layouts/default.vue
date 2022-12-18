@@ -30,7 +30,7 @@ export default {
   border-color: #C397FF !important;
 }
 .text-primary {
-  color: #C397FF;
+  color: #C397FF !important;
 }
 .text-main {
   font-size: 20px;

@@ -15,67 +15,17 @@
                         20 December 2022
                     </div>
                 </v-col>
-                <v-col cols="12" class="">
-                    <v-card class="mx-auto active" max-width="400">
-                        <v-img
-                            class="white--text align-end"
-                            height="200px"
-                            src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-                        >
-                            <div class="more-detail">More Detail</div>
-                        </v-img>
-                        <div class="card-content">
-                            <div>
-                                <v-card-text class="text--primary">
-                                    <h1>Design Thinking 1</h1>
-                                </v-card-text>
-                                <v-card-subtitle class="pt-0">Marvelous Team A</v-card-subtitle>
-                            </div>
-                            <v-btn class="circle">
-                                <v-icon>check</v-icon>
-                            </v-btn>
-                        </div>
-                    </v-card>
-                    <v-card class="mx-auto" max-width="400">
-                        <v-img
-                            class="white--text align-end"
-                            height="200px"
-                            src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-                        >
-                            <div class="more-detail">More Detail</div>
-                        </v-img>
-                        <div class="card-content">
-                            <div>
-                                <v-card-text class="text--primary">
-                                    <h1>Design Thinking 2</h1>
-                                </v-card-text>
-                                <v-card-subtitle class="pt-0">Marvelous Team B</v-card-subtitle>
-                            </div>
-                            <v-btn class="circle">
-                                <v-icon>check</v-icon>
-                            </v-btn>
-                        </div>
-                    </v-card>
-                    <v-card class="mx-auto" max-width="400">
-                        <v-img
-                            class="white--text align-end"
-                            height="200px"
-                            src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-                        >
-                            <div class="more-detail">More Detail</div>
-                        </v-img>
-                        <div class="card-content">
-                            <div>
-                                <v-card-text class="text--primary">
-                                    <h1>Design Thinking 3</h1>
-                                </v-card-text>
-                                <v-card-subtitle class="pt-0">Marvelous Team C</v-card-subtitle>
-                            </div>
-                            <v-btn class="circle">
-                                <v-icon>check</v-icon>
-                            </v-btn>
-                        </div>
-                    </v-card>
+                <v-col cols="12">
+                    <Card
+                        :active="selectedWorkshop==1"
+                        v-on:moreDetail="moreDetail"
+                        v-on:chooseWorkshop="chooseWorkshop(1)"
+                    />
+                    <Card
+                        :active="selectedWorkshop==2"
+                        v-on:moreDetail="moreDetail"
+                        v-on:chooseWorkshop="chooseWorkshop(2)"
+                    />
                 </v-col>
                 <v-col cols="12" class="text-center">
                     <div class="set-padding">
@@ -85,76 +35,72 @@
                     </div>
                 </v-col>
             </v-row>
+            <v-dialog v-model="dialog" max-width="290">
+                <v-card class="dialog-card">
+                    <v-img
+                        class="white--text align-end"
+                        height="200px"
+                        src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+                    >
+                    </v-img>
+                    <v-card-title class="headline">Design Thinking 1</v-card-title>
+                    <v-card-text>
+                        <p>Time: 13:00 - 16:00</p>
+                        <p>Place: Room 101</p>
+                        <p class="detail">Design Thinking is a design methodology that provides a solution-based approach to solving problems. We will focus on the five-stage Design Thinking model. Empathise, Define (th problem), Ideate, Prototype and Test.</p>
+                        <p>Speaker <br/>-Mr. John David <br/>-Mr. David Round</p>
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn class="text-primary" text @click="dialog = false">
+                            OK
+                        </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
         </v-container>
     </div>
 </template>
 
 <script>
+import Card from '~/components/Card'
 export default {
+    components: {
+        Card
+    },
+    data() {
+        return {
+            dialog: false,
+            selectedWorkshop: 0
+        }
+    },
     methods: {
         next() {
 
+        },
+        moreDetail() {
+            this.dialog = true
+        },
+        chooseWorkshop(id) {
+            this.selectedWorkshop = id
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
-.circle {
-    width: 32px !important;
-    height: 32px !important;
-    min-width: auto !important;
-    border-radius: 50%;
-    color: white;
-    background: rgba($color: #C397FF, $alpha: 0.3) !important;
-    align-self: center;
-}
-.card-content {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px;
-}
-.more-detail {
-    font-size: 12px;
-    color: #C397FF;
-    border-radius: 25px;
-    background-color: white;
-    padding: 10px 20px;
-    font-weight: bold;
-    display: inline;
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-}
-.v-card__subtitle {
-    padding: 0;
-}
-.v-card__text {
-    padding: 0;
-    padding-bottom: 5px;
-    h1 {
-        font-size: 24px;
+.dialog-card {
+    p {
+        margin-bottom: 0;
     }
-}
-.v-card+.v-card {
-    margin-top: 25px;
-}
-.v-card.active {
-    .circle {
-        background: #C397FF !important;
+    .v-card__title.headline {
+        font-size: 20px !important;
     }
-    .v-image {
-        &::before {
-            width: 100%;
-            height: 100%;
-            content: 'Selected';
-            font-weight: bold;
-            font-size: 24px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #C397FF;
-        }
+    .v-card__text {
+        padding-bottom: 0;
+    }
+    .detail {
+        margin: 10px 0;
     }
 }
 </style>
