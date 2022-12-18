@@ -12,19 +12,17 @@
             <v-row>
                 <v-col cols="12" class="text-center">
                     <div class="mt-5 mb-0 text-primary text-title">
-                        20 December 2022
+                        {{ list.date }}
                     </div>
                 </v-col>
                 <v-col cols="12">
                     <Card
-                        :active="selectedWorkshop==1"
-                        v-on:moreDetail="moreDetail"
-                        v-on:chooseWorkshop="chooseWorkshop(1)"
-                    />
-                    <Card
-                        :active="selectedWorkshop==2"
-                        v-on:moreDetail="moreDetail"
-                        v-on:chooseWorkshop="chooseWorkshop(2)"
+                        v-for="item in list.sessions"
+                        :session="item"
+                        :key="item.id"
+                        :active="selectedWorkshop.includes(item.id)"
+                        v-on:moreDetail="moreDetail(item)"
+                        v-on:chooseWorkshop="chooseWorkshop(item)"
                     />
                 </v-col>
                 <v-col cols="12" class="text-center">
@@ -32,27 +30,30 @@
                         <v-btn rounded color="primary" dark class="w-100 mt-1 my-btn" @click="next">
                             Next
                         </v-btn>
+                        <div v-if="index > 0" class="w-100 my-btn text-primary" @click="back">Back</div>
                     </div>
                 </v-col>
             </v-row>
-            <v-dialog v-model="dialog" max-width="290">
+            <v-dialog v-model="isShowDialog" max-width="290">
                 <v-card class="dialog-card">
                     <v-img
                         class="white--text align-end"
                         height="200px"
-                        src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+                        :src="dialog.image"
                     >
                     </v-img>
-                    <v-card-title class="headline">Design Thinking 1</v-card-title>
+                    <v-card-title class="headline">{{ dialog.title }}</v-card-title>
                     <v-card-text>
-                        <p>Time: 13:00 - 16:00</p>
-                        <p>Place: Room 101</p>
-                        <p class="detail">Design Thinking is a design methodology that provides a solution-based approach to solving problems. We will focus on the five-stage Design Thinking model. Empathise, Define (th problem), Ideate, Prototype and Test.</p>
-                        <p>Speaker <br/>-Mr. John David <br/>-Mr. David Round</p>
+                        <p>Time: {{ dialog.time }}</p>
+                        <p>Place: {{ dialog.place }}</p>
+                        <p class="detail">{{ dialog.detail }}</p>
+                        <p>Speaker <br/>
+                        <span v-html="dialog.spakers"></span>
+                        </p>
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn class="text-primary" text @click="dialog = false">
+                        <v-btn class="text-primary" text @click="isShowDialog = false">
                             OK
                         </v-btn>
                     </v-card-actions>
@@ -70,19 +71,49 @@ export default {
     },
     data() {
         return {
-            dialog: false,
-            selectedWorkshop: 0
+            isShowDialog: false,
+            index: 0,
+            dialog: {
+                title: '',
+                time: '',
+                place: '',
+                image: '',
+                detail: '',
+                speakers: ''
+            },
+            selectedWorkshop: [],
+            list: [],
+            workshops: this.$store.getters.getWorkshop
         }
     },
+    mounted() {
+        //api
+        this.list = this.workshops[this.index]
+    },
     methods: {
+        back() {
+            this.index = this.index-1
+            this.list = this.workshops[this.index]
+        },
         next() {
-
+            if(this.index == this.workshops.length-1) {
+                //api save register workshop
+                this.$axios.patch(`https://blue-nuxt-default-rtdb.firebaseio.com/workshops/line:001.json`, { ...this.selectedWorkshop }).then((res) => {
+                    this.$router.push('/workshop/done')
+                }).catch(e => console.log(e))
+            } else {
+                this.index = this.index+1
+                this.list = this.workshops[this.index]
+            }
         },
-        moreDetail() {
-            this.dialog = true
+        moreDetail(item) {
+            this.isShowDialog = true
+            this.dialog = item
         },
-        chooseWorkshop(id) {
-            this.selectedWorkshop = id
+        chooseWorkshop(item) {
+            const listId = this.list.sessions.map(session => session.id)
+            this.selectedWorkshop = this.selectedWorkshop.filter(session => !listId.includes(session))
+            this.selectedWorkshop.push(item.id)
         }
     }
 }

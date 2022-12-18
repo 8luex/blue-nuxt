@@ -10,9 +10,9 @@
         <div class="card-content">
             <div>
                 <v-card-text class="text--primary">
-                    <h1>Design Thinking 1</h1>
+                    <h1>{{ session.title }}</h1>
                 </v-card-text>
-                <v-card-subtitle class="pt-0">Marvelous Team A</v-card-subtitle>
+                <v-card-subtitle class="pt-0">{{ session.spaker }}</v-card-subtitle>
             </div>
             <v-btn class="circle" @click="$emit('chooseWorkshop')">
                 <v-icon>check</v-icon>
@@ -23,7 +23,7 @@
 
 <script>
 export default {
-    props: ['active']
+    props: ['active', 'session']
 }
 </script>
 

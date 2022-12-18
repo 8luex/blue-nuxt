@@ -177,7 +177,7 @@ export default {
                 this.$store.dispatch('setRegister', this.form)
                 this.$axios.patch(`https://blue-nuxt-default-rtdb.firebaseio.com/members/line:001/profile.json`, this.$store.getters.getRegister).then((res) => {
                     this.$router.push('/register/done')
-                })
+                }).catch(e => console.log(e))
                 //patch(add then update) push(only add)
                 //console.log("Register")
             }
