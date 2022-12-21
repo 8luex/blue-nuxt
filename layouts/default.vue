@@ -29,6 +29,12 @@ export default {
   background-color: #C397FF !important;
   border-color: #C397FF !important;
 }
+.bold {
+  font-weight: bold;
+}
+.uppercase {
+  text-transform: uppercase;
+}
 .text-primary {
   color: #C397FF !important;
 }

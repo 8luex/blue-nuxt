@@ -28,13 +28,15 @@
                         <v-text-field
                             v-model="form.firstname"
                             dense
-                            label="Firstname"                   
+                            label="Firstname"
+                            color="deep-purple accent-1"                   
                         >
                         </v-text-field>
                         <v-text-field
                             v-model="form.lastname"
                             dense
                             label="Lastname"
+                            color="deep-purple accent-1"
                         >
                         </v-text-field>
                         <div class="gender-group d-flex mt-3">

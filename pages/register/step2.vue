@@ -22,7 +22,8 @@
                             v-model="form.email"
                             dense
                             :rules="emailRules"
-                            label="Email"                   
+                            label="Email"
+                            color="deep-purple accent-1"                
                         >
                         </v-text-field>
                         <v-text-field
@@ -30,7 +31,8 @@
                             dense
                             :rules="phoneRules"
                             @keypress="onlyNumber($event, 10)"
-                            label="Phone"                   
+                            label="Phone"
+                            color="deep-purple accent-1"                   
                         >
                         </v-text-field>
                         <v-dialog
@@ -47,6 +49,7 @@
                                     readonly
                                     v-on="on"
                                     class="set-birthday"
+                                    color="deep-purple accent-1"
                                 ></v-text-field>
                             </template>
                             <v-date-picker :max="new Date().toISOString().substr(0, 10)" v-model="form.birthday" scrollable>
@@ -59,13 +62,15 @@
                         <v-text-field
                             v-model="form.company"
                             dense
-                            label="Company"                   
+                            label="Company"   
+                            color="deep-purple accent-1"                
                         >
                         </v-text-field>
                         <v-text-field
                             v-model="form.position"
                             dense
-                            label="Position"                   
+                            label="Position"
+                            color="deep-purple accent-1"                 
                         >
                         </v-text-field>
                         <v-btn rounded color="primary" dark class="w-100 mt-10 my-btn" @click="register">

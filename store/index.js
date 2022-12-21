@@ -162,6 +162,9 @@ export const getters = {
     },
     getWorkshop(state) {
         return state.data.workshops
+    },
+    getAgenda(state) {
+        return state.data.agenda
     }
 }
 
