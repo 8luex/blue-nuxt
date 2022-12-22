@@ -1,4 +1,9 @@
 export const state = () => ({
+    line: {
+        pictureUrl: null,
+        displayName: null,
+        userId: null
+    },
     dialog: {
         isShow: false,
         title: '',
@@ -173,6 +178,9 @@ export const getters = {
     },
     getSurvey(state) {
         return state.survey
+    },
+    getLine(state) {
+        return state.line
     }
 }
 
@@ -194,6 +202,12 @@ export const mutations = {
             ...state.survey,
             ...data
         }
+    },
+    SET_LINE(state, data) {
+        state.line = {
+            ...state.line,
+            ...data
+        }
     }
 }
 
@@ -206,5 +220,8 @@ export const actions = {
     },
     setSurvey({ commit }, data) {
         commit('SET_SURVEY', data)
+    },
+    setLine({ commit }, data) {
+        commit('SET_LINE', data)
     }
 }

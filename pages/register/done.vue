@@ -38,7 +38,7 @@ export default {
             this.$router.push('/workshop')
         },
         close() {
-
+            liff.closeWindow();
         }
     }
 }

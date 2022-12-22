@@ -20,6 +20,7 @@
                         <p class="text-main mb-0 mt-4">Tell us more a bit</p>
                         <v-text-field
                             v-model="form.email"
+                            type="email"
                             dense
                             :rules="emailRules"
                             label="Email"
@@ -180,7 +181,7 @@ export default {
         register() {
             if(this.validate()) {
                 this.$store.dispatch('setRegister', this.form)
-                this.$axios.patch(`https://blue-nuxt-default-rtdb.firebaseio.com/members/line:001/profile.json`, this.$store.getters.getRegister).then((res) => {
+                this.$axios.patch(`https://blue-nuxt-default-rtdb.firebaseio.com/members/${this.$store.getters.getLine.userId}/profile.json`, this.$store.getters.getRegister).then((res) => {
                     this.$router.push('/register/done')
                 }).catch(e => console.log(e))
                 //patch(add then update) push(only add)

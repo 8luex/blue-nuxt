@@ -17,11 +17,12 @@
                 </v-col>
                 <v-col cols="12" class="text-center pb-0">
                     <v-avatar size="155px">
-                        <img src="~/assets/profile.jpg" alt="" width="155">
+                        <img v-if="getLine.pictureUrl == ''" src="~/assets/profile.jpg" alt="" width="155">
+                        <img v-else :src="getLine.pictureUrl" alt="" width="155">
                     </v-avatar>
                 </v-col>
                 <v-col cols="12" class="text-center pt-2 pb-0">
-                    Display name
+                    {{ getLine.displayName }}
                 </v-col>
                 <v-col cols="12" class="text-center">
                     <v-form>
@@ -63,6 +64,28 @@
 
 <script>
 export default {
+    mounted() {
+        liff.init({
+            liffId: '1657670230-1nZ27ANq'
+        }).then(() => {
+            if(liff.isLoggedIn()) {
+                liff.getProfile().then(profile => {
+                    // this.profile.pictureUrl = profile.pictureUrl
+                    // this.profile.displayName = profile.displayName
+                    // this.profile.userId = profile.userId
+                    this.$store.dispatch('setLine', profile);
+                    this.isDone();
+                })
+            } else {
+                liff.login();
+            }
+        })
+    },
+    computed: {
+        getLine() {
+            return this.$store.getters.getLine;
+        },
+    },
     data() {
         return {
             form: {
@@ -73,6 +96,13 @@ export default {
         }
     },
     methods: {
+        isDone() {
+            this.$axios.get(`https://blue-nuxt-default-rtdb.firebaseio.com/members/${this.$store.getters.getLine.userId}/profile.json`).then((res) => {
+                if(res.data != null) {
+                    this.$router.push('/register/done')
+                }
+            }).catch(e => console.log(e))
+        },
         chooseGender(gender) {
             this.form.gender = gender
         },
