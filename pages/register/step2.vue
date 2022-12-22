@@ -29,6 +29,7 @@
                         </v-text-field>
                         <v-text-field
                             v-model="form.phone"
+                            type="number"
                             dense
                             :rules="phoneRules"
                             @keypress="onlyNumber($event, 10)"
