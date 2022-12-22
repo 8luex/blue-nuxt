@@ -76,9 +76,6 @@ export default {
             width: 45px !important;
             height: 45px !important;
         }
-        .v-slider__track-background {
-            //
-        }
         .v-slider--horizontal .v-slider__track-container {
             height: 4px;
         }
