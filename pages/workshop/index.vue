@@ -98,7 +98,7 @@ export default {
         next() {
             if(this.index == this.workshops.length-1) {
                 //api save register workshop
-                this.$axios.patch(`https://blue-nuxt-default-rtdb.firebaseio.com/workshops/line:001.json`, { ...this.selectedWorkshop }).then((res) => {
+                this.$axios.patch(`https://blue-nuxt-default-rtdb.firebaseio.com/workshops/${this.$store.getters.getLine.userId}.json`, { ...this.selectedWorkshop }).then((res) => {
                     this.$router.push('/workshop/done')
                 }).catch(e => console.log(e))
             } else {
