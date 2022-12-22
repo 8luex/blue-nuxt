@@ -9,33 +9,21 @@
         <v-toolbar-title>Survey</v-toolbar-title>
         </v-app-bar>
         <v-container class="pt-0 pb-0">
-            <v-row>
+            <v-row justify="center">
                 <v-col cols="12" class="text-center">
                     <div class="mt-8 text-primary text-title">
-                        Step 1 of 3
+                        Step 3 of 3
                     </div>
                 </v-col>
-            </v-row>
-            <v-row justify="center">
                 <v-col cols="10" class="text-center mt-1">
-                    <h2>How would you rate the event overall?</h2>
-                </v-col>
-                <v-col cols="10">
-                    <v-slider
-                        class="slider"
-                        v-model="form.survey1"
-                        thumb-label="always"
-                        :max="10"
-                        :min="0"
-                        track-color="grey lighten-1"
-                    >
-                    </v-slider>
+                    <h2>Which parts of the event did you enjoy?</h2>
                 </v-col>
                 <v-col cols="12" class="text-center">
                     <div class="set-padding">
                         <v-btn rounded color="primary" dark class="w-100 mt-15 my-btn" @click="next">
                             Next
                         </v-btn>
+                        <div class="w-100 my-btn text-primary" @click="back">Back</div>
                     </div>
                 </v-col>
             </v-row>
@@ -48,7 +36,7 @@ export default {
     data() {
         return {
             form: {
-                survey1: this.$store.getters.getSurvey.survey1
+                survey3: this.$store.getters.getSurvey.survey3
             }
         }
     },
@@ -56,32 +44,13 @@ export default {
         next() {
             this.$store.dispatch('setSurvey', this.form)
             this.$axios.patch(`https://blue-nuxt-default-rtdb.firebaseio.com/survey/line:001.json`, this.form).then((res) => {
-                this.$router.push('/survey/step2')
+                //this.$router.push('/survey/step3')
             }).catch(e => console.log(e))
-        }
+        },
+        back() {
+            this.$store.dispatch('setSurvey', this.form) //BLUE
+            this.$router.push('/survey/step2')
+        },
     }
 }
 </script>
-
-<style lang="scss" scoped>
-.slider {
-    margin-top: 90px;
-    ::v-deep {
-        .v-slider__thumb {
-            width: 15px;
-            height: 15px;
-        }
-        .v-slider__thumb-label {
-            font-size: 20px;
-            width: 45px !important;
-            height: 45px !important;
-        }
-        .v-slider__track-background {
-            //
-        }
-        .v-slider--horizontal .v-slider__track-container {
-            height: 4px;
-        }
-    }
-}
-</style>
