@@ -69,6 +69,28 @@ export default {
     components: {
         Card
     },
+    mounted() {
+        liff.init({
+            liffId: '1657670230-1nZ27ANq'
+        }).then(() => {
+            if(liff.isLoggedIn()) {
+                liff.getProfile().then(profile => {
+                    // this.profile.pictureUrl = profile.pictureUrl
+                    // this.profile.displayName = profile.displayName
+                    // this.profile.userId = profile.userId
+                    this.$store.dispatch('setLine', profile);
+                    this.isDone();
+                })
+            } else {
+                liff.login();
+            }
+        })
+    },
+    computed: {
+        getLine() {
+            return this.$store.getters.getLine;
+        },
+    },
     data() {
         return {
             isShowDialog: false,
