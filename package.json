@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
-    "start": "SET NODE_OPTIONS=--openssl-legacy-provider && vue-scripts start",
-    "build": "SET NODE_OPTIONS=--openssl-legacy-provider && vue-scripts build",
+    "build": "nuxt build",
+    "start": "nuxt start",
     "generate": "nuxt generate"
   },
   "dependencies": {
