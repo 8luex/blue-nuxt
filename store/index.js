@@ -7,7 +7,7 @@ export const state = () => ({
     survey: {
         survey1: 5,
         survey2: '',
-        survey3: '',
+        survey3: 1,
     },
     register: {
         firstname: '',

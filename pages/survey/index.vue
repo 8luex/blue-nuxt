@@ -18,7 +18,7 @@
             </v-row>
             <v-row justify="center">
                 <v-col cols="10" class="text-center mt-1">
-                    <h2>How would you rate the event overall?</h2>
+                    <h2 class="text-main">How would you rate the event overall?</h2>
                 </v-col>
                 <v-col cols="10">
                     <v-slider

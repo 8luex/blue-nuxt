@@ -16,7 +16,7 @@
                     </div>
                 </v-col>
                 <v-col cols="10" class="text-center mt-1">
-                    <h2>Which parts of the event did you enjoy?</h2>
+                    <h2 class="text-main">Which parts of the event did you enjoy?</h2>
                 </v-col>
                 <v-col cols="10" class="text-center">
                     <v-textarea
