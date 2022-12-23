@@ -24,6 +24,16 @@ export const state = () => ({
         company: '',
         position: ''
     },
+    profile: {
+        firstname: null,
+        lastname: null,
+        gender: null,
+        email: null,
+        phone: null,
+        birthday: null,
+        company: null,
+        position: null,
+    },
     data: {  
         agenda: [
             {
@@ -164,6 +174,9 @@ export const state = () => ({
 })
 
 export const getters = {
+    getProfile(state) {
+        return state.profile
+    },
     getRegister(state) {
         return state.register
     },
@@ -185,6 +198,12 @@ export const getters = {
 }
 
 export const mutations = {
+    SET_PROFILE(state, data) {
+        state.profile = {
+            ...state.profile,
+            ...data
+        }
+    },
     SET_REGISTER(state, data) {
         state.register = {
             ...state.register,
@@ -212,6 +231,9 @@ export const mutations = {
 }
 
 export const actions = {
+    setProfile({ commit }, data) {
+        commit('SET_PROFILE', data) //user
+    },
     setRegister({ commit }, data) {
         commit('SET_REGISTER', data)
     },
