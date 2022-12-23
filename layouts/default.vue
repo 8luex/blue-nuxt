@@ -38,6 +38,9 @@ export default {
 .text-primary {
   color: #C397FF !important;
 }
+.text-disabled {
+  color: #888EA0 !important;
+}
 .text-main {
   font-size: 20px;
 }
@@ -57,6 +60,23 @@ export default {
   min-height: 50px;
   &.outlined {
     border: 1px solid #C397FF;
+    border-radius: 28px;
+    line-height: normal;
+    letter-spacing: 0.0892857143em;
+    text-indent: 0.0892857143em;
+    user-select: none;
+    white-space: nowrap;
+  }
+}
+.my-btn-disabled {
+  font-size: 20px !important;
+  text-transform: none !important;
+  height: auto !important;
+  padding: 10px 0 !important;
+  font-weight: bold;
+  min-height: 50px;
+  &.outlined {
+    border: 1px solid #888EA0;
     border-radius: 28px;
     line-height: normal;
     letter-spacing: 0.0892857143em;
