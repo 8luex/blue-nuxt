@@ -79,5 +79,11 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+
+  //Deploying my Nuxt app to Netlify
+  target: 'static',
+  generate: {
+    fallback: true
   }
 }
